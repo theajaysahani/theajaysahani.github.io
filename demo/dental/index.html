@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo Dental Clinic · Sample website by Ajay</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Demo Dental Clinic · Sample website by Ajay">
+<meta property="og:description" content="A sample dental clinic website: treatments and fees, WhatsApp booking, appointment reminders and check-up recall.">
+<meta property="og:url" content="https://theajaysahani.github.io/demo/dental/">
+<meta property="og:image" content="https://theajaysahani.github.io/assets/og-dental.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://theajaysahani.github.io/demo/dental/">
+<meta name="description" content="A sample dental clinic website: treatments and fees, WhatsApp booking, appointment reminders and check-up recall.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbf8f4;
+    --surface: #ffffff;
+    --ink: #1f2a2e;
+    --muted: #5d6b70;
+    --line: #e7e1d8;
+    --brand: #1f5f5b;
+    --brand-ink: #ffffff;
+    --brand-soft: #e3efed;
+    --accent: #c9785d;
+    --accent-soft: #f6e6df;
+    --wa: #25d366;
+    --wa-dark: #128c7e;
+    --chat-bg: #efe7dd;
+    --bubble-in: #ffffff;
+    --bubble-out: #d9fdd3;
+    --radius: 16px;
+    --shadow: 0 10px 30px rgba(31, 42, 46, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: Fraunces, Georgia, serif; font-weight: 600; line-height: 1.15; margin: 0 0 12px; }
+  h1 { font-size: clamp(2rem, 5vw, 3.3rem); letter-spacing: -0.01em; }
+  h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); }
+  h3 { font-size: 1.2rem; }
+  p { margin: 0 0 12px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 72px 0; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+  .lead { color: var(--muted); font-size: 1.08rem; max-width: 640px; }
+
+  /* demo ribbon */
+  .demo-bar { background: var(--ink); color: #f3efe9; font-size: .85rem; text-align: center; padding: 8px 16px; }
+  .demo-bar strong { color: #ffd9c9; }
+
+  /* header */
+  header { position: sticky; top: 0; z-index: 20; background: rgba(251, 248, 244, .92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 20px; max-width: 1120px; margin: 0 auto; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-mark { width: 36px; height: 36px; border-radius: 50%; background: var(--brand); display: grid; place-items: center; color: #fff; font-family: Fraunces, serif; font-size: 1.1rem; }
+  .logo b { display: block; font-family: Fraunces, serif; font-size: 1.05rem; line-height: 1.1; }
+  .logo small { color: var(--muted); font-size: .75rem; }
+  .nav-links { display: flex; gap: 22px; font-size: .95rem; }
+  .nav-links a { text-decoration: none; color: var(--muted); }
+  .nav-links a:hover { color: var(--ink); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; cursor: pointer; text-decoration: none; font: 600 .95rem/1 Inter, sans-serif; padding: 14px 20px; border-radius: 999px; transition: transform .15s ease, box-shadow .15s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--brand); color: var(--brand-ink); box-shadow: 0 6px 16px rgba(31, 95, 91, .25); }
+  .btn-wa { background: var(--wa); color: #08361f; }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .btn-sm { padding: 10px 16px; font-size: .9rem; }
+
+  /* hero */
+  .hero { padding: 64px 0 56px; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0 28px; }
+  .trust { display: flex; flex-wrap: wrap; gap: 22px; color: var(--muted); font-size: .92rem; }
+  .trust b { color: var(--ink); }
+  .hero-card { background: var(--surface); border-radius: 24px; padding: 28px; box-shadow: var(--shadow); border: 1px solid var(--line); }
+  .hero-card h3 { margin-bottom: 6px; }
+  .slot-list { display: grid; gap: 10px; margin: 18px 0 20px; }
+  .slot { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-radius: 12px; background: var(--brand-soft); font-size: .95rem; }
+  .slot span:last-child { color: var(--brand); font-weight: 600; }
+  .hero-card small { color: var(--muted); }
+
+  /* treatments */
+  .grid { display: grid; gap: 18px; }
+  .t-grid { grid-template-columns: repeat(3, 1fr); margin-top: 32px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; }
+  .card .icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); display: grid; place-items: center; font-size: 1.3rem; margin-bottom: 14px; }
+  .card p { color: var(--muted); font-size: .95rem; flex: 1; }
+  .card .price { font-size: .9rem; color: var(--ink); margin-bottom: 14px; }
+  .card .price b { color: var(--brand); }
+
+  /* steps */
+  .steps { grid-template-columns: repeat(3, 1fr); margin-top: 32px; }
+  .step { background: var(--surface); border-radius: var(--radius); padding: 24px; border: 1px solid var(--line); }
+  .step .num { font-family: Fraunces, serif; font-size: 2rem; color: var(--accent); line-height: 1; margin-bottom: 10px; }
+  .step p { color: var(--muted); font-size: .95rem; margin: 0; }
+
+  /* booking */
+  .booking { background: var(--brand); color: #eef6f5; }
+  .booking .eyebrow { color: #ffd9c9; }
+  .booking .lead { color: #cfe3e0; }
+  .book-grid { display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: start; margin-top: 28px; }
+  form.book { background: var(--surface); color: var(--ink); border-radius: 20px; padding: 26px; display: grid; gap: 14px; box-shadow: 0 20px 40px rgba(0, 0, 0, .18); }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  label { display: grid; gap: 6px; font-size: .88rem; font-weight: 500; }
+  input, select, textarea { font: inherit; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: #fdfcfa; color: var(--ink); width: 100%; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--brand); outline-offset: 1px; border-color: transparent; }
+  .form-note { font-size: .8rem; color: var(--muted); margin: 0; }
+
+  /* phone mockup */
+  .phone { background: #111; border-radius: 34px; padding: 10px; box-shadow: 0 24px 48px rgba(0, 0, 0, .3); }
+  .screen { border-radius: 26px; overflow: hidden; background: var(--chat-bg); height: 560px; display: flex; flex-direction: column; }
+  .wa-top { background: var(--wa-dark); color: #fff; padding: 14px 16px; display: flex; align-items: center; gap: 10px; }
+  .wa-top .av { width: 34px; height: 34px; border-radius: 50%; background: #fff; color: var(--brand); display: grid; place-items: center; font-family: Fraunces, serif; font-weight: 600; }
+  .wa-top b { display: block; font-size: .95rem; }
+  .wa-top small { opacity: .85; font-size: .75rem; }
+  .chat { flex: 1; padding: 14px 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+  .msg { max-width: 86%; min-width: 76px; padding: 8px 10px 18px; border-radius: 10px; font-size: .86rem; line-height: 1.45; color: #1d1d1d; position: relative; white-space: pre-line; box-shadow: 0 1px 1px rgba(0, 0, 0, .06); }
+  .msg.in { background: var(--bubble-in); align-self: flex-start; border-top-left-radius: 2px; }
+  .msg.out { background: var(--bubble-out); align-self: flex-end; border-top-right-radius: 2px; }
+  .msg time { position: absolute; right: 8px; bottom: 3px; font-size: .68rem; color: #667; }
+  .chat-label { align-self: center; background: #fff8; font-size: .72rem; color: #555; padding: 3px 10px; border-radius: 8px; }
+  .typing { align-self: flex-start; background: var(--bubble-in); padding: 10px 14px; border-radius: 10px; display: none; }
+  .typing i { display: inline-block; width: 6px; height: 6px; background: #999; border-radius: 50%; margin: 0 2px; animation: blink 1s infinite; }
+  .typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+  @keyframes blink { 0%, 100% { opacity: .3 } 50% { opacity: 1 } }
+  .phone-caption { color: #cfe3e0; font-size: .85rem; margin-top: 14px; text-align: center; }
+
+  /* doctor */
+  .doc-grid { display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: center; }
+  .doc-photo { aspect-ratio: 4 / 5; border-radius: 24px; background: linear-gradient(160deg, var(--brand-soft), var(--accent-soft)); display: grid; place-items: center; color: var(--brand); font-family: Fraunces, serif; font-size: 4rem; border: 1px solid var(--line); }
+  .creds { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .chip { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: .85rem; }
+
+  /* reviews */
+  .r-grid { grid-template-columns: repeat(3, 1fr); margin-top: 28px; }
+  .review { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .stars { color: #e0a32e; letter-spacing: 2px; }
+  .review p { font-size: .95rem; margin: 10px 0 12px; }
+  .review small { color: var(--muted); }
+  .sample-tag { display: inline-block; font-size: .7rem; background: var(--accent-soft); color: var(--accent); padding: 2px 8px; border-radius: 6px; margin-left: 6px; vertical-align: middle; }
+
+  /* owner report */
+  .owner { background: #f3eee7; }
+  .report { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 26px; margin-top: 28px; box-shadow: var(--shadow); }
+  .report-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .report-head small { color: var(--muted); }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .kpi { background: var(--bg); border-radius: 14px; padding: 16px; }
+  .kpi b { display: block; font-family: Fraunces, serif; font-size: 1.9rem; line-height: 1.1; }
+  .kpi span { color: var(--muted); font-size: .85rem; }
+  .bars { margin-top: 24px; display: grid; gap: 12px; }
+  .bar { display: grid; grid-template-columns: 110px 1fr 70px; gap: 12px; align-items: center; font-size: .9rem; }
+  .bar-track { background: var(--bg); border-radius: 999px; height: 12px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--brand); border-radius: 999px; }
+  .bar em { font-style: normal; color: var(--muted); text-align: right; }
+
+  /* faq */
+  details { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-top: 12px; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { color: var(--muted); margin: 10px 0 0; }
+
+  /* builder strip + footer */
+  .builder { background: var(--ink); color: #f3efe9; border-radius: 24px; padding: 32px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .builder h2 { color: #fff; margin-bottom: 6px; }
+  .builder p { color: #cdd5d7; margin: 0; max-width: 560px; }
+  footer { padding: 40px 0 100px; color: var(--muted); font-size: .9rem; }
+  .foot-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 24px; }
+  footer b { color: var(--ink); display: block; margin-bottom: 6px; }
+
+  /* floating whatsapp */
+  .wa-float { position: fixed; right: 18px; bottom: 18px; z-index: 30; width: 58px; height: 58px; border-radius: 50%; background: var(--wa); display: grid; place-items: center; box-shadow: 0 10px 24px rgba(0, 0, 0, .2); border: 0; cursor: pointer; }
+  .wa-float svg { width: 30px; height: 30px; fill: #fff; }
+
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(120px); background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 12px; font-size: .9rem; z-index: 40; transition: transform .3s ease; max-width: calc(100% - 32px); }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hero-grid, .book-grid, .doc-grid { grid-template-columns: 1fr; }
+    .t-grid, .steps, .r-grid { grid-template-columns: 1fr 1fr; }
+    .kpis { grid-template-columns: 1fr 1fr; }
+    .foot-grid { grid-template-columns: 1fr; }
+    .doc-photo { max-width: 260px; }
+    .phone { max-width: 360px; margin: 0 auto; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 56px 0; }
+    .wrap { padding: 0 16px; }
+    .nav { padding: 12px 16px; }
+    .t-grid, .steps, .r-grid { grid-template-columns: 1fr; }
+    .row2 { grid-template-columns: 1fr; }
+    .bar { grid-template-columns: 84px 1fr 56px; }
+    .header-book { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-bar"><strong>Sample website by <a href="../../build.html" style="color:#ffd9c9">Ajay Sahani</a>.</strong> "Demo Dental Clinic" is not a real clinic. Try the booking form to see what your patients would get on WhatsApp, including the check-up reminder.</div>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="#top" aria-label="Demo Dental Clinic home">
+      <span class="logo-mark">D</span>
+      <span><b>Demo Dental Clinic</b><small>Borivali West, Mumbai</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#treatments">Treatments &amp; fees</a>
+      <a href="#doctor">Dentist</a>
+      <a href="#visit">Visit</a>
+      <a href="#owner">For clinic owners</a>
+    </div>
+    <a class="btn btn-primary btn-sm header-book" href="#book">Book an appointment</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">General &amp; family dentistry</div>
+        <h1>Check-ups, fillings and root canals, with fees listed upfront.</h1>
+        <p class="lead">Book in 30 seconds and get your confirmation on WhatsApp straight away. We remind you the day before your visit, and again when your next check-up is due.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#book">Book an appointment</a>
+          <button class="btn btn-wa" type="button" data-wa>WhatsApp us</button>
+        </div>
+        <div class="trust">
+          <span><b>Fees</b> listed for every treatment</span>
+          <span><b>BDS, MDS</b> <span class="sample-tag">sample</span></span>
+          <span><b>Open till 8 pm</b>, Mon–Sat</span>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Next available slots">
+        <h3>Next available slots</h3>
+        <small>Tap a slot to book it</small>
+        <div class="slot-list" id="slots"></div>
+        <small>Prefer to talk? Call or WhatsApp, and we reply within minutes, even when the front desk is busy.</small>
+      </aside>
+    </div>
+  </section>
+
+  <section id="treatments" style="padding-top: 24px;">
+    <div class="wrap">
+      <div class="eyebrow">Treatments &amp; fees</div>
+      <h2>Clear treatments, clear fees.</h2>
+      <p class="lead">Factual information and fees, as the Dental Council's code allows for clinic websites. Patients know what to expect before they book.</p>
+      <div class="grid t-grid" id="treatment-grid"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">How booking works</div>
+      <h2>No enquiry goes cold.</h2>
+      <div class="grid steps">
+        <div class="step"><div class="num">1</div><h3>Book in 30 seconds</h3><p>Name, phone, treatment and a preferred time. Works on any phone, day or night.</p></div>
+        <div class="step"><div class="num">2</div><h3>Instant WhatsApp reply</h3><p>The patient gets a confirmation on WhatsApp within seconds, before they can call another clinic.</p></div>
+        <div class="step"><div class="num">3</div><h3>Reminders that bring patients back</h3><p>A reminder the day before the visit, and a check-up reminder when the patient is due. Patients can stop reminders any time.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking" id="book">
+    <div class="wrap">
+      <div class="eyebrow">Try it</div>
+      <h2 style="color:#fff">Book an appointment</h2>
+      <p class="lead">This is a demo: nothing is sent anywhere. Fill it in and watch the phone on the right to see what your patient would receive.</p>
+      <div class="book-grid">
+        <form class="book" id="book-form" novalidate>
+          <div class="row2">
+            <label>Your name<input name="name" id="f-name" autocomplete="off" placeholder="e.g. Priya" required></label>
+            <label>Mobile (WhatsApp)<input name="phone" id="f-phone" inputmode="tel" autocomplete="off" placeholder="98XXXXXXXX"></label>
+          </div>
+          <label>Treatment
+            <select name="treatment" id="f-treatment"></select>
+          </label>
+          <div class="row2">
+            <label>Preferred day<select id="f-day"></select></label>
+            <label>Preferred time
+              <select id="f-time">
+                <option>Morning (10 am – 1 pm)</option>
+                <option>Afternoon (1 – 5 pm)</option>
+                <option selected>Evening (5 – 8 pm)</option>
+              </select>
+            </label>
+          </div>
+          <label>Anything we should know? (optional)<textarea id="f-note" rows="2" placeholder="e.g. sensitivity in a lower tooth"></textarea></label>
+          <button class="btn btn-primary" type="submit">Book now</button>
+          <p class="form-note">Demo only. In the real version, this lands in the clinic's WhatsApp and appointment sheet instantly.</p>
+        </form>
+        <div>
+          <div class="phone" aria-live="polite">
+            <div class="screen">
+              <div class="wa-top"><span class="av">D</span><span><b>Demo Dental Clinic</b><small>Business account</small></span></div>
+              <div class="chat" id="chat">
+                <div class="chat-label">Today</div>
+                <div class="msg in">Fill in the booking form and your confirmation will appear here.<time>now</time></div>
+                <div class="typing" id="typing"><i></i><i></i><i></i></div>
+              </div>
+            </div>
+          </div>
+          <p class="phone-caption">What the patient sees on WhatsApp</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="doctor">
+    <div class="wrap doc-grid">
+      <div class="doc-photo" aria-hidden="true">Dr</div>
+      <div>
+        <div class="eyebrow">Your dentist</div>
+        <h2>Dr. [Your Name], BDS, MDS</h2>
+        <p class="lead">Your qualifications, registration number, languages and the treatments you offer. Factual and simple, with photos of the clinic so patients recognise it when they arrive.</p>
+        <div class="creds">
+          <span class="chip">BDS, MDS (Endodontics)</span>
+          <span class="chip">Dental Council Reg. No. [xxxx]</span>
+          <span class="chip">Mon–Sat, 10 am – 8 pm</span>
+          <span class="chip">English · Hindi · Marathi</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="eyebrow">Visit</div>
+      <h2>Timings, location and payments.</h2>
+      <div class="grid r-grid">
+        <div class="review"><p><b>Timings</b><br>Mon–Sat: 10 am – 1 pm, 5 – 8 pm<br>Sunday: emergencies by appointment</p></div>
+        <div class="review"><p><b>Location</b><br>Shop 4, [Building name], near Borivali station (West)<br>Google Map link</p></div>
+        <div class="review"><p><b>Payments</b><br>UPI, cards and cash. Treatment plans and fees are explained before any work starts.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="owner" id="owner">
+    <div class="wrap">
+      <div class="eyebrow">For clinic owners</div>
+      <h2>Every Monday: one simple report.</h2>
+      <p class="lead">See how many patients booked, how fast they got a reply, how many reminders went out and how many check-ups they brought back. No software to learn; it arrives on WhatsApp or email.</p>
+      <div class="report">
+        <div class="report-head"><h3 style="margin:0">Weekly enquiry report</h3><small>Example week · sample numbers</small></div>
+        <div class="kpis">
+          <div class="kpi"><b>31</b><span>Booking requests</span></div>
+          <div class="kpi"><b>&lt; 1 min</b><span>Average first reply</span></div>
+          <div class="kpi"><b>22</b><span>Appointments booked</span></div>
+          <div class="kpi"><b>9</b><span>Check-ups booked from 40 recall reminders</span></div>
+        </div>
+        <div class="bars" aria-label="Enquiries by source">
+          <div class="bar"><span>Google</span><div class="bar-track"><div class="bar-fill" style="width:42%"></div></div><em>13</em></div>
+          <div class="bar"><span>Recall</span><div class="bar-track"><div class="bar-fill" style="width:29%"></div></div><em>9</em></div>
+          <div class="bar"><span>WhatsApp</span><div class="bar-track"><div class="bar-fill" style="width:16%"></div></div><em>5</em></div>
+          <div class="bar"><span>Walk-in</span><div class="bar-track"><div class="bar-fill" style="width:13%"></div></div><em>4</em></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-bottom: 24px;">
+    <div class="wrap">
+      <div class="eyebrow">Questions</div>
+      <h2>Common questions</h2>
+      <details><summary>I already use practice software. Do I need this?</summary><p>Often you just need it set up properly. If your software can send WhatsApp reminders, I connect and configure it instead of adding another tool. You only pay for what's missing.</p></details>
+      <details><summary>Is this allowed for dentists?</summary><p>The site shows only factual information: treatments, fees, qualifications and timings. The Dental Council's Code of Ethics (2014, clause 8.2.9) says a website with factual information and fees is not unethical. No testimonials, no "best dentist" claims and no discount offers. Check with your council if you're unsure.</p></details>
+      <details><summary>Who replies to patients?</summary><p>The first reply is automatic and instant. Your team then takes over the conversation in the same WhatsApp chat.</p></details>
+      <details><summary>How long does it take?</summary><p>About 2 weeks from go-ahead to launch, including your treatment list, fees and clinic photos.</p></details>
+      <details><summary>Is patient data safe?</summary><p>Bookings go only to your own WhatsApp and a private sheet that only your clinic can open. Reminders go only to patients who agreed to receive them, and every reminder has a way to stop.</p></details>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="builder">
+        <div>
+          <h2>Want this for your clinic?</h2>
+          <p>Built by <a href="../../index.html" style="color:#fff">Ajay Sahani</a>, founder and product builder from Mumbai. Your own version, with your treatments, fees and photos, live in about 2 weeks.</p>
+        </div>
+        <a class="btn btn-wa" id="builder-cta" href="#book">Message Ajay on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div><b>Demo Dental Clinic</b>Sample website for demonstration only. Not a real clinic, and no dental advice is given here.</div>
+    <div><b>Timings</b>Mon–Sat: 10 am – 8 pm<br>Sunday: closed</div>
+    <div><b>Location</b>Borivali West, Mumbai<br>(your address and Google Map go here)</div>
+  </div>
+</footer>
+
+<button class="wa-float" type="button" data-wa aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.4.7 4.7 1.9 6.7L3 29l6.9-2.1c1.9 1 4 1.6 6.1 1.6 7 0 12.7-5.7 12.7-12.7C28.7 8.6 23 3 16 3zm0 23.2c-1.9 0-3.8-.5-5.4-1.5l-.4-.2-4.1 1.2 1.2-4-.3-.4c-1.1-1.7-1.6-3.6-1.6-5.6 0-5.8 4.7-10.5 10.6-10.5 5.8 0 10.5 4.7 10.5 10.5S21.8 26.2 16 26.2zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.6-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8 0 1.6 1.2 3.2 1.4 3.4.2.2 2.3 3.5 5.6 4.9 2.8 1.1 3.3.9 3.9.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
+</button>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+  // Set Ajay's WhatsApp number (country code, no +) to make the "Message Ajay" button live.
+  const AJAY_WHATSAPP = "918850117504";
+
+  const TREATMENTS = [
+    { icon: "🪥", name: "Check-up & cleaning", text: "Examination, scaling and polishing, with a clear plan if anything needs attention.", from: "₹800" },
+    { icon: "🦷", name: "Fillings", text: "Tooth-coloured fillings for cavities and chipped teeth.", from: "₹1,200" },
+    { icon: "🩺", name: "Root canal treatment", text: "Treats an infected tooth so it can be saved, usually followed by a crown.", from: "₹5,000" },
+    { icon: "😁", name: "Braces & aligners", text: "Consultation and treatment options for crooked or crowded teeth.", from: "₹500 consult" },
+    { icon: "🔩", name: "Dental implants", text: "Replacing a missing tooth with an implant and crown, after an assessment.", from: "₹25,000" },
+    { icon: "🧒", name: "Children's dentistry", text: "Check-ups, fillings and preventive care for kids.", from: "₹600" },
+  ];
+
+  const $ = (s) => document.querySelector(s);
+  const grid = $("#treatment-grid");
+  const sel = $("#f-treatment");
+  TREATMENTS.forEach((t, i) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `<div class="icon" aria-hidden="true">${t.icon}</div><h3>${t.name}</h3><p>${t.text}</p><div class="price">From <b>${t.from}</b> <span class="sample-tag">sample</span></div><a class="btn btn-ghost btn-sm" href="#book" data-pick="${i}">Book this</a>`;
+    grid.appendChild(card);
+    const o = document.createElement("option");
+    o.textContent = t.name;
+    sel.appendChild(o);
+  });
+  sel.value = "Check-up & cleaning";
+  grid.addEventListener("click", (e) => {
+    const a = e.target.closest("[data-pick]");
+    if (a) sel.value = TREATMENTS[+a.dataset.pick].name;
+  });
+
+  // Next days for the booking form and the hero slots
+  const day = $("#f-day");
+  const fmt = (d) => d.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" });
+  const days = [];
+  for (let i = 1, d = new Date(); days.length < 6; i++) {
+    const x = new Date(d.getFullYear(), d.getMonth(), d.getDate() + i);
+    if (x.getDay() !== 0) days.push(x);
+  }
+  days.forEach((d) => { const o = document.createElement("option"); o.textContent = fmt(d); day.appendChild(o); });
+  const slotTimes = ["11:30 am", "6:00 pm", "7:15 pm"];
+  $("#slots").innerHTML = slotTimes.map((t, i) => `<a class="slot" href="#book" data-day="${i ? 1 : 0}" data-time="${i ? 2 : 0}" style="text-decoration:none"><span>${fmt(days[i ? 1 : 0])} · ${t}</span><span>Book →</span></a>`).join("");
+  $("#slots").addEventListener("click", (e) => {
+    const s = e.target.closest(".slot");
+    if (!s) return;
+    day.selectedIndex = +s.dataset.day;
+    $("#f-time").selectedIndex = +s.dataset.time;
+  });
+
+  // Toast + WhatsApp buttons (demo)
+  const toast = $("#toast");
+  let toastTimer;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 3200);
+  }
+  document.querySelectorAll("[data-wa]").forEach((b) =>
+    b.addEventListener("click", () => showToast("Demo: on the real site this opens a WhatsApp chat with the clinic, and the patient gets an instant reply."))
+  );
+  if (AJAY_WHATSAPP) {
+    $("#builder-cta").href = "https://wa.me/" + AJAY_WHATSAPP + "?text=" + encodeURIComponent("Hi Ajay, I saw your sample dental clinic website. I'd like to know more.");
+    $("#builder-cta").target = "_blank";
+    $("#builder-cta").rel = "noopener";
+  }
+
+  // Booking demo: show the WhatsApp conversation the patient would get
+  const chat = $("#chat");
+  const typing = $("#typing");
+  const now = () => new Date().toLocaleTimeString("en-IN", { hour: "numeric", minute: "2-digit" });
+  function bubble(text, who, label) {
+    const el = document.createElement("div");
+    el.className = "msg " + who;
+    el.textContent = text;
+    const t = document.createElement("time");
+    t.textContent = label || now();
+    el.appendChild(t);
+    chat.insertBefore(el, typing);
+    chat.scrollTop = chat.scrollHeight;
+  }
+  function note(text) {
+    const el = document.createElement("div");
+    el.className = "chat-label";
+    el.textContent = text;
+    chat.insertBefore(el, typing);
+  }
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  $("#book-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = $("#f-name").value.trim() || "there";
+    const treatment = sel.value;
+    const when = day.value + ", " + $("#f-time").value.split(" (")[0].toLowerCase();
+    if (window.matchMedia("(max-width: 900px)").matches) $(".phone").scrollIntoView({ behavior: "smooth", block: "center" });
+    chat.querySelectorAll(".msg, .chat-label").forEach((n) => n.remove());
+    note("Today");
+    bubble(`Booking request: ${treatment}, ${when}`, "out");
+    typing.style.display = "block";
+    await wait(1400);
+    typing.style.display = "none";
+    bubble(`Hi ${name}! 👋 Thanks for choosing Demo Dental Clinic.\n\nWe've received your request for ${treatment} on ${when}.\n\nOur team will confirm your exact slot within 15 minutes.\n\nReply 1 to confirm · 2 to change the time`, "in");
+    await wait(1200);
+    bubble("1", "out");
+    typing.style.display = "block";
+    await wait(1000);
+    typing.style.display = "none";
+    bubble(`Confirmed ✅ See you on ${day.value}.\n📍 Borivali West (map link)\nPlease arrive 10 minutes early.`, "in");
+    await wait(900);
+    note("Day before the visit");
+    bubble(`Reminder: your ${treatment} appointment is tomorrow, ${when.split(", ").pop()}. Reply 2 if you need to reschedule.`, "in", "6:00 pm");
+    await wait(900);
+    note("6 months later");
+    bubble(`Hi ${name}, it's been 6 months since your last check-up at Demo Dental Clinic. Would you like to book your next one?\n\nReply 1 for this week · 2 for next week · STOP to stop reminders`, "in", "11:00 am");
+    await wait(1100);
+    bubble("1", "out", "11:04 am");
+    typing.style.display = "block";
+    await wait(900);
+    typing.style.display = "none";
+    bubble(`Booked ✅ We'll confirm your exact slot shortly. See you soon, ${name}!`, "in", "11:04 am");
+  });
+</script>
+</body>
+</html>
